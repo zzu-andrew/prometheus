@@ -285,6 +285,7 @@ func (c *flagConfig) setFeatureListOptions(logger *slog.Logger) error {
 }
 
 func main() {
+
 	if os.Getenv("DEBUG") != "" {
 		runtime.SetBlockProfileRate(20)
 		runtime.SetMutexProfileFraction(20)
