@@ -68,7 +68,7 @@ const (
 	// over-estimated.
 	maxPointsSliceSize = 5000
 
-	// The default buffer size for points used by the matrix selector.
+	// The default buffer size for points used by the matrix selector. ma
 	matrixSelectorSliceSize = 16
 )
 
