@@ -174,15 +174,16 @@ func agentOnlyFlag(app *kingpin.Application, name, help string) *kingpin.FlagCla
 type flagConfig struct {
 	configFile string
 
-	agentStoragePath            string
-	serverStoragePath           string
-	notifier                    notifier.Options
-	forGracePeriod              model.Duration
-	outageTolerance             model.Duration
-	resendDelay                 model.Duration
-	maxConcurrentEvals          int64
-	web                         web.Options
-	scrape                      scrape.Options
+	agentStoragePath   string
+	serverStoragePath  string
+	notifier           notifier.Options
+	forGracePeriod     model.Duration
+	outageTolerance    model.Duration
+	resendDelay        model.Duration
+	maxConcurrentEvals int64
+	web                web.Options
+	scrape             scrape.Options
+	// 时序数据库配置
 	tsdb                        tsdbOptions
 	agent                       agentOptions
 	lookbackDelta               model.Duration
@@ -547,6 +548,9 @@ func main() {
 	cfg.web.NotificationsSub = notifs.Sub
 	cfg.web.NotificationsGetter = notifs.Get
 	notifs.AddNotification(notifications.StartingUp)
+
+	logger.Info("Start prometheus")
+	fmt.Fprintln(os.Stdout, "Start prometheus")
 
 	if err := cfg.setFeatureListOptions(logger); err != nil {
 		fmt.Fprintln(os.Stderr, fmt.Errorf("Error parsing feature list: %w", err))
